@@ -1,0 +1,10 @@
+.activeClass {
+  .menu-list {
+    a {
+      &.is-active {
+        background-color: green;
+        // color: $menu-item-active-color;
+      }
+    }
+  }
+}
