@@ -1,29 +1,24 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import icon from '../assets/icon.svg';
+import Sidebar from './layout/Sidebar';
+import Example from './views/Example';
+import Example2 from './views/Example2';
 import './styles/App.global.scss';
-
-const Hello = () => {
-  return (
-    <div>
-      <div className="buttons">
-        <button className="button is-primary" type="button">
-          Primary
-        </button>
-        <button className="button is-link" type="button">
-          Link
-        </button>
-      </div>
-    </div>
-  );
-};
 
 export default function App() {
   return (
     <Router>
-      <Switch>
-        <Route path="/" component={Hello} />
-      </Switch>
+      <div className="columns is-gapless">
+        <div className="column is-one-quarter">
+          <Sidebar />
+        </div>
+        <div className="column">
+          <Switch>
+            <Route exact path="/" component={Example} />
+            <Route path="/example" component={Example2} />
+          </Switch>
+        </div>
+      </div>
     </Router>
   );
 }
