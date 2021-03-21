@@ -1,6 +1,7 @@
 import React from 'react';
+import Calendar from '../components/Calendar';
 
-export default function Example() {
+export default function CalendarTab() {
   return (
     <div>
       <div className="buttons">
@@ -11,6 +12,7 @@ export default function Example() {
           Link
         </button>
       </div>
+      <Calendar />
     </div>
   );
 }
