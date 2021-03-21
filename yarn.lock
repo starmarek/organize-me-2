@@ -1116,6 +1116,11 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
+"@creativebulma/bulma-tagsinput@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@creativebulma/bulma-tagsinput/-/bulma-tagsinput-1.0.3.tgz#bbf38aad9a4ed0f04f2baa7832b21679cdc54462"
+  integrity sha512-uQg0KEBcvEmSfwozv2EkFtqai1+pwOgunt3YLlADjRuyKXQePcR3nPW4EDnLMsCt9XlDr4RLu5pcp3XwHIhaOQ==
+
 "@develar/schema-utils@~2.6.5":
   version "2.6.5"
   resolved "https://registry.yarnpkg.com/@develar/schema-utils/-/schema-utils-2.6.5.tgz#3ece22c5838402419a6e0425f85742b961d9b6c6"

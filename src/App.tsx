@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import icon from '../assets/icon.svg';
 import './styles/App.global.scss';
+import UserConfigForm from './components/user/UserConfigForm';
 
 const Hello = () => {
   return (
@@ -22,7 +22,7 @@ export default function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/" component={Hello} />
+        <Route path="/" component={UserConfigForm} />
       </Switch>
     </Router>
   );
