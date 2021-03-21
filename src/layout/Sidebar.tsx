@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import '../styles/Sidebar.scss';
+import '../styles/Sidebar.global.scss';
 
 export default function Sidebar() {
   return (
@@ -15,7 +15,7 @@ export default function Sidebar() {
           </NavLink>
         </li>
         <li>
-          <NavLink activeClassName="is-active" to="/example">
+          <NavLink activeClassName="activeClass" to="/example">
             Example2
           </NavLink>
         </li>
