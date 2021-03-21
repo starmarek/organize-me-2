@@ -15,7 +15,7 @@ export default function Sidebar() {
               <span className="icon">
                 <i className="fas fa-calendar-alt" />
               </span>
-              <span>Calendar</span>
+              <span>Kalendarz</span>
             </span>
           </NavLink>
         </li>
