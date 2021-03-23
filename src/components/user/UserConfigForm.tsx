@@ -28,6 +28,7 @@ const UserConfigForm = () => {
               <div className="label">Imię</div>
               <div className="control">
                 <input
+                  required
                   className="input"
                   type="text"
                   placeholder="Wprowadź imię"
@@ -44,6 +45,7 @@ const UserConfigForm = () => {
               <div className="label">Nazwisko</div>
               <div className="control">
                 <input
+                  required
                   className="input"
                   type="text"
                   placeholder="Wprowadź nazwisko"
