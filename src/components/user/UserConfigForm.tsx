@@ -1,23 +1,64 @@
 import React, { useState, useEffect } from 'react';
-
 import Select from 'react-select';
 
+import workersApi from '../../api/workersAPI';
+
+interface WorkerOption {
+  value: number;
+  label: string;
+}
+
+// TODO check useReducer hook
 const UserConfigForm = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [preferredShift, setPreferredShift] = useState('');
+  const [preferredShift, setPreferredShift] = useState(undefined);
   const [preferredCoworkers, setPreferredCoworkers] = useState([]);
 
-  const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' },
-  ];
+  const [workers, setWorkers] = useState([]);
+  const [options, setOptions] = useState<WorkerOption>();
+
+  const createOptions = (workersList) => {
+    const opt: WorkerOption[] = [];
+    workersList.forEach((worker) => {
+      opt.push({
+        value: worker.id,
+        label: worker.public_id
+          ? `${worker.first_name} ${worker.last_name} (${worker.public_id})`
+          : `${worker.first_name} ${worker.last_name}`,
+      });
+    });
+
+    return opt;
+  };
 
   const addWorker = (event) => {
     event.preventDefault();
-    console.log({ firstName, lastName, preferredShift, preferredCoworkers });
+    workersApi
+      .addWorker({
+        first_name: firstName,
+        last_name: lastName,
+        preferred_shift: preferredShift,
+        preferred_coworkers: preferredCoworkers,
+      })
+      .then((res) => res)
+      .catch((err) => {
+        throw err;
+      });
   };
+
+  useEffect(() => {
+    workersApi
+      .fetchWorkers()
+      .then((wrk) => setWorkers(wrk))
+      .catch((err) => {
+        throw err;
+      });
+  }, []);
+
+  useEffect(() => {
+    setOptions(createOptions(workers));
+  }, [workers]);
 
   return (
     <div>
@@ -68,9 +109,9 @@ const UserConfigForm = () => {
                   setPreferredShift(event.target.value);
                 }}
               >
-                <option value="">Brak</option>
-                <option value="day">Dzienna</option>
-                <option value="night">Nocna</option>
+                <option>Brak</option>
+                <option value="D">Dzienna</option>
+                <option value="N">Nocna</option>
               </select>
             </div>
           </div>
@@ -84,7 +125,9 @@ const UserConfigForm = () => {
               closeMenuOnSelect={false}
               className="basic-multi-select"
               classNamePrefix="select"
-              onChange={setPreferredCoworkers}
+              onChange={(opts) =>
+                setPreferredCoworkers(opts.map((opt) => opt.value))
+              }
             />
           </div>
         </div>

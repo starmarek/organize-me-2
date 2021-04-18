@@ -9,5 +9,5 @@ router.register("workers", WorkersView)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("workers/", include(router.urls)),
+    path("", include(router.urls)),
 ]

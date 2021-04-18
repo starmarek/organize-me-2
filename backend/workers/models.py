@@ -3,19 +3,19 @@ from django.utils.translation import gettext_lazy as _
 
 
 class Worker(models.Model):
-    class PrefferedShift(models.TextChoices):
+    class PreferredShift(models.TextChoices):
         DAY = "D", _("Day")
         NIGHT = "N", _("Night")
 
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
-    preffered_shift = models.CharField(
+    preferred_shift = models.CharField(
         max_length=5,
-        choices=PrefferedShift.choices,
+        choices=PreferredShift.choices,
         default=None,
         null=True,
     )
-    preffered_coworkers = models.ManyToManyField("self", null=True)
+    preferred_coworkers = models.ManyToManyField("self", blank=True)
     public_id = models.IntegerField(null=True)
 
     def __str__(self):
