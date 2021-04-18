@@ -20,13 +20,8 @@ export default function Sidebar() {
           </NavLink>
         </li>
         <li>
-          <NavLink activeClassName="activeClass" to="/example">
-            Example2
-          </NavLink>
-        </li>
-        <li>
           <NavLink activeClassName="activeClass" to="/workerConfig">
-            User Config Form
+            Dodaj użytkownika
           </NavLink>
         </li>
       </ul>
