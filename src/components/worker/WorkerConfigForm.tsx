@@ -2,54 +2,9 @@ import React, { useReducer, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import Select from 'react-select';
 
+import { Worker, WorkerOption } from './workerInterfaces';
+import { reducer, initialState } from './workerReducer';
 import workersApi from '../../api/workersAPI';
-
-interface Worker {
-  id: number;
-  public_id: number | null;
-  first_name: string;
-  last_name: string;
-  preferred_shift: string | null;
-  preferred_coworkers: number[];
-}
-
-interface WorkerOption {
-  value: number;
-  label: string;
-}
-
-interface State {
-  firstName: string;
-  lastName: string;
-  preferredShift?: string;
-  preferredCoworkers: number[];
-  workers: Worker[];
-  options: WorkerOption[];
-}
-
-interface FormAction {
-  type: string;
-  value?: string | string[] | number | number[] | Worker[] | WorkerOption[];
-}
-
-const initialState: State = {
-  firstName: '',
-  lastName: '',
-  preferredShift: undefined,
-  preferredCoworkers: [],
-  workers: [],
-  options: [],
-};
-
-const reducer = (state: State, action: FormAction) => {
-  if (action.type === 'reset') {
-    return initialState;
-  }
-
-  const result: State = { ...state };
-  result[action.type] = action.value;
-  return result;
-};
 
 const WorkerConfigForm = () => {
   const history = useHistory();
@@ -204,7 +159,11 @@ const WorkerConfigForm = () => {
             </button>
           </p>
           <p className="control">
-            <button className="button is-light" type="button">
+            <button
+              className="button is-light"
+              type="button"
+              onClick={() => history.push('/')}
+            >
               Anuluj
             </button>
           </p>
