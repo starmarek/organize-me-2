@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Sidebar from './layout/Sidebar';
 import Example from './views/Example';
 import Example2 from './views/Example2';
-import UserConfigForm from './components/user/UserConfigForm';
+import WorkerConfigForm from './components/worker/WorkerConfigForm';
 import './styles/App.global.scss';
 
 export default function App() {
@@ -17,7 +17,7 @@ export default function App() {
           <Switch>
             <Route exact path="/" component={Example} />
             <Route path="/example" component={Example2} />
-            <Route path="/userConfig" component={UserConfigForm} />
+            <Route path="/workerConfig" component={WorkerConfigForm} />
           </Switch>
         </div>
       </div>
