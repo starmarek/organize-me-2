@@ -2,8 +2,13 @@ import React, { useReducer, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import Select from 'react-select';
 
-import { Worker, WorkerOption } from './workerInterfaces';
-import { reducer, initialState } from './workerReducer';
+import { Worker, WorkerOption } from '../../interfaces/workerInterfaces';
+import {
+  reducer,
+  initialState,
+  handleReactSelectChange,
+} from '../../reducers/workerReducer';
+import { handleChange } from '../../reducers/reducersUtils';
 import workersApi from '../../api/workersAPI';
 
 const WorkerConfigForm = () => {
@@ -51,20 +56,6 @@ const WorkerConfigForm = () => {
       });
   };
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    const { name, value } = e.target;
-    dispatch({ type: name, value });
-  };
-
-  const handleCustomSelectChange = (opts: WorkerOption[]) => {
-    dispatch({
-      type: 'preferredCoworkers',
-      value: opts.map((opt: WorkerOption) => opt.value),
-    });
-  };
-
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     addWorker();
@@ -100,7 +91,9 @@ const WorkerConfigForm = () => {
                   placeholder="Wprowadź imię"
                   value={firstName}
                   name="firstName"
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    handleChange<string>(e, dispatch);
+                  }}
                 />
               </div>
             </div>
@@ -116,7 +109,9 @@ const WorkerConfigForm = () => {
                   placeholder="Wprowadź nazwisko"
                   value={lastName}
                   name="lastName"
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    handleChange<string>(e, dispatch);
+                  }}
                 />
               </div>
             </div>
@@ -129,7 +124,9 @@ const WorkerConfigForm = () => {
               <select
                 value={preferredShift}
                 name="preferredShift"
-                onChange={handleChange}
+                onChange={(e) => {
+                  handleChange<string>(e, dispatch);
+                }}
               >
                 <option value={undefined}>Brak</option>
                 <option value="D">Dzienna</option>
@@ -148,7 +145,9 @@ const WorkerConfigForm = () => {
               className="basic-multi-select"
               classNamePrefix="select"
               name="preferredCoworkers"
-              onChange={handleCustomSelectChange}
+              onChange={(opts: WorkerOption[]) => {
+                handleReactSelectChange(opts, dispatch, 'preferredCoworkers');
+              }}
             />
           </div>
         </div>

@@ -13,7 +13,6 @@ class Worker(models.Model):
         max_length=5,
         choices=PreferredShift.choices,
         default=None,
-        null=True,
     )
     preferred_coworkers = models.ManyToManyField("self", blank=True)
     public_id = models.IntegerField(null=True)
