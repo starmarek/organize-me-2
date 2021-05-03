@@ -15,17 +15,15 @@ export default function ShiftCalendar() {
           {
             title: 'All Day Event very long title',
             allDay: true,
-            start: new Date(2015, 3, 0),
-            end: new Date(2015, 3, 1),
+            start: new Date(2021, 0, 0),
+            end: new Date(2021, 0, 1),
           },
           {
             title: 'Long Event',
-            start: new Date(2015, 3, 7),
-            end: new Date(2015, 3, 10),
+            start: new Date(2021, 4, 7),
+            end: new Date(2021, 4, 10),
           },
         ]}
-        startAccessor="start"
-        endAccessor="end"
       />
     </div>
   );

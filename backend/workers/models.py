@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from ..shifts.models import Shift
+
 
 class Worker(models.Model):
     class PreferredShift(models.TextChoices):
@@ -17,6 +19,7 @@ class Worker(models.Model):
     )
     preferred_coworkers = models.ManyToManyField("self", blank=True)
     public_id = models.IntegerField(null=True)
+    shifts = models.ManyToManyField(Shift)
 
     def __str__(self):
         str_repr = f"{self.first_name} {self.last_name}"

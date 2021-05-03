@@ -58,3 +58,6 @@ npm-debug.log.*
 *.css.d.ts
 *.sass.d.ts
 *.scss.d.ts
+
+django_static/
+db.sqlite3
