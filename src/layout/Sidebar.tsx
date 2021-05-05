@@ -10,18 +10,18 @@ export default function Sidebar() {
     >
       <ul className="menu-list">
         <li>
-          <NavLink exact activeClassName="activeClass" to="/">
-            Example
-          </NavLink>
-        </li>
-        <li>
-          <NavLink activeClassName="activeClass" to="/example">
-            Example2
+          <NavLink activeClassName="activeClass" to="/calendar">
+            <span className="icon-text">
+              <span className="icon">
+                <i className="fas fa-calendar-alt" />
+              </span>
+              <span>Kalendarz</span>
+            </span>
           </NavLink>
         </li>
         <li>
           <NavLink activeClassName="activeClass" to="/workerConfig">
-            User Config Form
+            Dodaj użytkownika
           </NavLink>
         </li>
       </ul>
