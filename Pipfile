@@ -7,6 +7,7 @@ name = "pypi"
 django = "*"
 djangorestframework = "*"
 django-recurrence = "*"
+djangorestframework-camel-case = "*"
 
 [dev-packages]
 black = "==20.8b1"
