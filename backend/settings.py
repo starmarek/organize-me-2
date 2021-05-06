@@ -131,3 +131,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, "django_static")
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 DATETIME_FORMAT = "%Y-%m-%d_%H:%M:%S"
+
+USE_TZ = False

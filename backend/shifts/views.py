@@ -2,7 +2,6 @@ import logging
 from datetime import datetime
 
 from django.conf import settings
-from django.utils import timezone
 from rest_framework import viewsets
 from rest_framework.response import Response
 
@@ -34,7 +33,7 @@ class ShiftView(viewsets.ModelViewSet):
                 data[i]["recurrences"] = shift.recurrences.between(
                     datetime.strptime(start, settings.DATETIME_FORMAT),
                     datetime.strptime(end, settings.DATETIME_FORMAT),
-                    dtstart=timezone.make_naive(shift.first_occurrence),
+                    dtstart=shift.first_occurrence,
                     inc=True,
                 )
             except ValueError:
