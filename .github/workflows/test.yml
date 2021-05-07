@@ -34,3 +34,19 @@ jobs:
         run: pipenv sync --dev
       - name: Check formatting with black
         run: pipenv run black . --check
+
+  isort:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.9.2
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9.2
+      - name: Install latest pipenv
+        run: python -m pip install pipenv
+      - name: Install dependencies
+        run: pipenv sync --dev
+      - name: Check imports with isort
+        run: pipenv run isort . --check
