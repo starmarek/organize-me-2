@@ -149,3 +149,5 @@ REST_FRAMEWORK = {
         'no_underscore_before_number': True,
     },
 }
+
+USE_TZ = False
