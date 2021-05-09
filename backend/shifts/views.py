@@ -40,7 +40,7 @@ class ShiftView(viewsets.ModelViewSet):
             except ValueError:
                 return Response(
                     {
-                        "error": f"Your query params {start} or {end} do not match datetime format {settings.DATETIME_FORMAT}"
+                        "error": f"Your query params {start} or {end} do not match datetime format {settings.DATETIME_FORMAT}"  # noqa E501
                     },
                     status=400,
                 )

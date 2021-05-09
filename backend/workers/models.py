@@ -29,13 +29,9 @@ class Worker(models.Model):
 
     def save(self, *args, **kwargs):
         same_name_worker = (
-            Worker.objects.filter(first_name=self.first_name, last_name=self.last_name)
-            .order_by("public_id")
-            .first()
+            Worker.objects.filter(first_name=self.first_name, last_name=self.last_name).order_by("public_id").first()
         )
         if same_name_worker:
-            self.public_id = (
-                same_name_worker.public_id + 1 if same_name_worker.public_id else 2
-            )
+            self.public_id = same_name_worker.public_id + 1 if same_name_worker.public_id else 2
 
         super(Worker, self).save(*args, **kwargs)

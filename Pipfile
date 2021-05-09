@@ -11,6 +11,7 @@ django-recurrence = "*"
 [dev-packages]
 black = "==20.8b1"
 flake8 = "*"
+isort = "*"
 
 [requires]
 python_version = "3.9.2"

@@ -1,33 +1,66 @@
 name: Test
 
-on: [push, pull_request]
+on: [pull_request]
 
 jobs:
-  release:
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os: [macos-latest, windows-latest, ubuntu-latest]
+  flake8:
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.9.2
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9.2
+      - name: Install latest pipenv
+        run: python -m pip install pipenv
+      - name: Install dependencies
+        run: pipenv sync --dev
+      - name: Lint with flake8
+        run: pipenv run flake8
 
+  black:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.9.2
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9.2
+      - name: Install latest pipenv
+        run: python -m pip install pipenv
+      - name: Install dependencies
+        run: pipenv sync --dev
+      - name: Check formatting with black
+        run: pipenv run black . --check
+
+  isort:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.9.2
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9.2
+      - name: Install latest pipenv
+        run: python -m pip install pipenv
+      - name: Install dependencies
+        run: pipenv sync --dev
+      - name: Check imports with isort
+        run: pipenv run isort . --check
+
+  eslint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
       - name: Install Node.js, NPM and Yarn
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
           node-version: 15
-
-      - name: yarn install
-        run: |
-          yarn install --frozen-lockfile --network-timeout 300000
-
-      - name: yarn test
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          yarn package
-          yarn lint
-          yarn tsc
-          yarn test
+      - name: Install dependencies
+        run: yarn install
+      - name: Lint with eslint
+        run: yarn lint
