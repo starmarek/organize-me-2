@@ -19,7 +19,7 @@ class Worker(models.Model):
     )
     preferred_coworkers = models.ManyToManyField("self", blank=True)
     public_id = models.IntegerField(null=True)
-    shifts = models.ManyToManyField(Shift)
+    shifts = models.ManyToManyField(Shift, blank=True)
 
     def __str__(self):
         str_repr = f"{self.first_name} {self.last_name}"

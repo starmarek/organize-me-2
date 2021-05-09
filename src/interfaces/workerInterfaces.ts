@@ -1,10 +1,10 @@
 export interface Worker {
   id: number;
-  public_id: number | null;
-  first_name: string;
-  last_name: string;
-  preferred_shift: string | null;
-  preferred_coworkers: number[];
+  publicId: number | null;
+  firstName: string;
+  lastName: string;
+  preferredShift: string | null;
+  preferredCoworkers: number[];
 }
 
 export interface WorkerOption {

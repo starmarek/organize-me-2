@@ -33,9 +33,9 @@ const WorkerConfigForm = () => {
     workersList.forEach((worker) => {
       opt.push({
         value: worker.id,
-        label: worker.public_id
-          ? `${worker.first_name} ${worker.last_name} (${worker.public_id})`
-          : `${worker.first_name} ${worker.last_name}`,
+        label: worker.publicId
+          ? `${worker.firstName} ${worker.lastName} (${worker.publicId})`
+          : `${worker.firstName} ${worker.lastName}`,
       });
     });
 
@@ -45,10 +45,10 @@ const WorkerConfigForm = () => {
   const addWorker = () => {
     workersApi
       .addWorker({
-        first_name: firstName,
-        last_name: lastName,
-        preferred_shift: preferredShift,
-        preferred_coworkers: preferredCoworkers,
+        firstName,
+        lastName,
+        preferredShift,
+        preferredCoworkers,
       })
       .then((res) => res)
       .catch((err) => {
