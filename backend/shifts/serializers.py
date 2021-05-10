@@ -1,7 +1,6 @@
 from datetime import datetime, timedelta
 
 from django.conf import settings
-from django.utils import timezone
 from rest_framework import serializers
 
 from .models import Shift
@@ -11,7 +10,7 @@ def expand_recurrences(obj, range_start, range_end):
     return obj.recurrences.between(
         datetime.strptime(range_start, settings.DATETIME_FORMAT),
         datetime.strptime(range_end, settings.DATETIME_FORMAT),
-        dtstart=timezone.make_naive(obj.first_occurrence),
+        dtstart=obj.first_occurrence,
         inc=True,
     )
 
