@@ -1,5 +1,5 @@
 import React from 'react';
-import ShiftCalendar from '../components/ShiftCalendar';
+import ShiftCalendar from '../components/shift/ShiftCalendar';
 
 export default function CalendarTab() {
   return (

@@ -1,11 +1,13 @@
 from datetime import datetime
+from itertools import chain
 
 from django.conf import settings
 from rest_framework import viewsets
+from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from .models import Shift
-from .serializers import ShiftCalendarSpecificSerializer, ShiftSerializer
+from .serializers import ShiftSerializer
 
 
 def trydatetime(datetime_string):
@@ -36,12 +38,7 @@ class ShiftView(viewsets.ModelViewSet):
     serializer_class = ShiftSerializer
     queryset = Shift.objects.all()
 
-    def get_serializer_class(self):
-        if self.request.query_params.get("calendar_specific"):
-            return ShiftCalendarSpecificSerializer
-        return super().get_serializer_class()
-
-    def list(self, request, *args, **kwargs):
+    def list(self, request):
         start = request.query_params.get("start")
         end = request.query_params.get("end")
 
@@ -50,7 +47,18 @@ class ShiftView(viewsets.ModelViewSet):
 
         queryset = self.filter_queryset(self.get_queryset())
         serializer = self.get_serializer(
-            queryset, many=True, context={"range_start": start, "range_end": end}
+            queryset,
+            many=True,
+            context={"range_start": start, "range_end": end},
         )
 
         return Response(serializer.data)
+
+    @action(detail=False)
+    def events(self, request):
+        start = request.query_params.get("start")
+        end = request.query_params.get("end")
+
+        event_list_list = [shift.event_list(start, end) for shift in Shift.objects.all()]
+        event_list = list(chain.from_iterable(event_list_list))
+        return Response(event_list)
